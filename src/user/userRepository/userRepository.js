@@ -8,6 +8,12 @@ const createUserRepository = async (usuario, contraseña, rol) => {
     
 }
 
+const getAllUserRepository = async () => {
+    const allUsers = await EntityUser.findAll();
+    return allUsers;
+}
+
 module.exports = {
-    createUserRepository
+    createUserRepository,
+    getAllUserRepository
 }

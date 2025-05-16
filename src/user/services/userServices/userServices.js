@@ -1,4 +1,5 @@
-const {createUserRepository} = require('../../userRepository/userRepository')
+const { all } = require('../../../router');
+const {createUserRepository, getAllUserRepository} = require('../../userRepository/userRepository')
 
 const createUserService = async ({usuario, contraseña, rol}) => {
 try {
@@ -9,6 +10,15 @@ try {
 }
 }
 
+const getAllUserService = async () => {
+const allUsers = await getAllUserRepository();
+if (!allUsers) {
+    throw new Error('No se encontraron usuarios', error.message);    
+}
+return allUsers;
+}
+
 module.exports = { 
-    createUserService
+    createUserService,
+    getAllUserService
 }

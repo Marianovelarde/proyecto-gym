@@ -1,4 +1,5 @@
-const {createUserService} = require('../services/userServices/userServices')
+const { get } = require('../../router');
+const {createUserService, getAllUserService} = require('../services/userServices/userServices')
 const createUserController = async (req, res) => {
     
     const {usuario, contraseña, rol} = req.body;
@@ -16,7 +17,19 @@ console.log('body', req.body);
     }
 }
 
+const getAllUserController = async (req,res) => {
+   try {
+     const getUser = await getAllUserService();
+
+     return res.status(200).json({message: 'Lista de usuarios', getUser});
+   } catch (error) {
+    console.error('Error al obtener la lista de usuarios:', error.message);
+    return res.status(500).json({message: 'Error al obtener la lista de usuarios', error});
+   }
+}
+
 
 module.exports = {
-    createUserController
+    createUserController,
+    getAllUserController
 }
