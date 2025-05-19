@@ -13,7 +13,15 @@ const getAllUserRepository = async () => {
     return allUsers;
 }
 
+const updateUserRepository = async (data, id) => {
+    
+    const updateUser = await EntityUser.findByPk(id)
+      await updateUser.update(data)
+
+      return updateUser
+}
 module.exports = {
     createUserRepository,
-    getAllUserRepository
+    getAllUserRepository,
+    updateUserRepository
 }

@@ -1,5 +1,8 @@
-const { get } = require('../../router');
-const {createUserService, getAllUserService} = require('../services/userServices/userServices')
+const {createUserService, 
+    getAllUserService, 
+    updateUserService} = require('../services/userServices/userServices')
+
+    
 const createUserController = async (req, res) => {
     
     const {usuario, contraseña, rol} = req.body;
@@ -27,9 +30,25 @@ const getAllUserController = async (req,res) => {
     return res.status(500).json({message: 'Error al obtener la lista de usuarios', error});
    }
 }
+const updateUserController = async (req, res) => {
+    const { id } = req.params;
+    const { usuario, contraseña, rol, Activated } = req.body;
+
+    if (!usuario && !contraseña && !rol && Activated === undefined) {
+        return res.status(400).json({ message: 'No se enviaron datos para modificar' });
+    }
+
+    try {
+        const updatedUser = await updateUserService({ usuario, contraseña, rol, Activated }, id);
+        return res.status(200).json({ message: 'Usuario modificado con éxito', updatedUser });
+    } catch (error) {
+        return res.status(500).json({ message: 'Error al modificar un usuario', error: error.message });
+    }
+};
 
 
 module.exports = {
     createUserController,
-    getAllUserController
+    getAllUserController,
+    updateUserController
 }

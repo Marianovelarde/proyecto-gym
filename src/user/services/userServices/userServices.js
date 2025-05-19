@@ -1,5 +1,6 @@
-const { all } = require('../../../router');
-const {createUserRepository, getAllUserRepository} = require('../../userRepository/userRepository')
+const {createUserRepository, 
+    getAllUserRepository, 
+    updateUserRepository} = require('../../userRepository/userRepository')
 
 const createUserService = async ({usuario, contraseña, rol}) => {
 try {
@@ -17,8 +18,21 @@ if (!allUsers) {
 }
 return allUsers;
 }
+const updateUserService = async (data, id) => {
+    try {
+        
+        const updateUser = await updateUserRepository(data, id)
+        return updateUser
+    } catch (error) {
+        
+        if(!updateUser) {
+            throw new Error ('Error en el servicio de modificación de usuario', error.message)
+    }
+    }
+}
 
 module.exports = { 
     createUserService,
-    getAllUserService
+    getAllUserService,
+    updateUserService
 }
