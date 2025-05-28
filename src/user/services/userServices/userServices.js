@@ -1,6 +1,7 @@
 const {createUserRepository, 
     getAllUserRepository, 
-    updateUserRepository} = require('../../userRepository/userRepository')
+    updateUserRepository,
+    getDeactivedUserRepository} = require('../../userRepository/userRepository')
 
 const createUserService = async ({usuario, contraseña, rol}) => {
 try {
@@ -18,6 +19,14 @@ if (!allUsers) {
 }
 return allUsers;
 }
+const getDeactivedUserService = async () => {
+    const userDeactived = await getDeactivedUserRepository()
+   
+    if(!userDeactived) {
+        throw new Error('Error en el servicio get de usuarios desactivados')
+    }
+     return userDeactived
+}
 const updateUserService = async (data, id) => {
     try {
         
@@ -34,5 +43,6 @@ const updateUserService = async (data, id) => {
 module.exports = { 
     createUserService,
     getAllUserService,
-    updateUserService
+    updateUserService,
+    getDeactivedUserService
 }

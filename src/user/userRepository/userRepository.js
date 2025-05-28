@@ -9,10 +9,22 @@ const createUserRepository = async (usuario, contraseña, rol) => {
 }
 
 const getAllUserRepository = async () => {
-    const allUsers = await EntityUser.findAll();
+    const allUsers = await EntityUser.findAll({
+        where: {
+            actived: true
+        }
+    });
     return allUsers;
 }
 
+const getDeactivedUserRepository = async () => {
+    const deactivedUser = EntityUser.findAll({
+        where: {
+            actived: false
+        }
+    })
+    return deactivedUser
+}
 const updateUserRepository = async (data, id) => {
     
     const updateUser = await EntityUser.findByPk(id)
@@ -23,5 +35,6 @@ const updateUserRepository = async (data, id) => {
 module.exports = {
     createUserRepository,
     getAllUserRepository,
-    updateUserRepository
+    updateUserRepository,
+    getDeactivedUserRepository
 }
