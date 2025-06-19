@@ -2,10 +2,11 @@ const {DataTypes} = require('sequelize');
 
 module.exports = (sequelize) => {
     sequelize.define('entityUser', {
-        id: {
-           type: DataTypes.UUID,
-  defaultValue: DataTypes.UUIDV4,
-  primaryKey: true
+        idUser: {
+           type: DataTypes.INTEGER,
+  primaryKey: true,
+  autoIncrement: true,
+  unique: true
         },
         usuario: {
             type: DataTypes.STRING,

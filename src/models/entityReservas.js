@@ -3,18 +3,12 @@ const {DataTypes} = require('sequelize');
 module.exports = (sequelize) => {
     sequelize.define('entityReservas', {
         id: {
-            type: DataTypes.UUID,
+            type: DataTypes.INTEGER,
             primaryKey: true,
             allowNull: false,
             unique: true
         },
-        userId: {
-            type: DataTypes.UUID,
-            allowNull: false,
-            references: {
-                model: 'entityUsers'
-        }
-    } ,
+       
     fecha: {
         type: DataTypes.DATE,
         allowNull: false    

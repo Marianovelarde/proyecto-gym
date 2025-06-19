@@ -38,6 +38,8 @@ const {EntityUser,
     EntityReservas,
 } = sequelize.models;
 
+EntityUser.hasMany(EntityPagos, {foreignKey: 'idUser' })
+EntityPagos.belongsTo(EntityUser, {foreignKey: 'idUser', })
 module.exports = {
     ...sequelize.models,
     conn: sequelize
